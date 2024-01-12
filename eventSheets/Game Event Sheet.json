@@ -1,0 +1,631 @@
+{
+	"name": "Game Event Sheet",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "selected",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "Number of pebbles selected by player",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 902394413257331
+		},
+		{
+			"eventType": "variable",
+			"name": "highest_number",
+			"type": "number",
+			"initialValue": "4",
+			"comment": "Highest number of pebbles to select",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 970999786708069
+		},
+		{
+			"eventType": "variable",
+			"name": "reset_count",
+			"type": "boolean",
+			"initialValue": "true",
+			"comment": "Whether to reset count variable",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 581109377494253
+		},
+		{
+			"eventType": "variable",
+			"name": "count",
+			"type": "number",
+			"initialValue": "3",
+			"comment": "Number of pebbles player must select",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 418447263767933
+		},
+		{
+			"eventType": "variable",
+			"name": "start",
+			"type": "boolean",
+			"initialValue": "false",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 470633594727718
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 852585753447743
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "Kraken",
+					"sid": 647773094059635
+				},
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 129759585842307,
+					"parameters": {
+						"variable": "start",
+						"value": "true"
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 236370717007206,
+					"parameters": {
+						"variable": "selected",
+						"value": "0"
+					}
+				},
+				{
+					"type": "script",
+					"script": "const param = new URLSearchParams(window.location.search);\nif(param.has(\"num\") && Number.isInteger(parseInt(param.get(\"num\"))))\n\t{\n\t\tconsole.log(\"param exists\");\n\t\truntime.globalVars.highest_number = parseInt(param.get(\"num\"));\n\t}"
+				}
+			],
+			"sid": 195141768575416
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 991908830990886
+				}
+			],
+			"actions": [],
+			"sid": 411088676587457,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "evaluate-expression",
+							"objectClass": "System",
+							"sid": 668039955036767,
+							"parameters": {
+								"value": "reset_count"
+							}
+						},
+						{
+							"id": "compare-eventvar",
+							"objectClass": "System",
+							"sid": 733814993508191,
+							"parameters": {
+								"variable": "count",
+								"comparison": 4,
+								"value": "highest_number"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 904360406275256,
+							"parameters": {
+								"variable": "count",
+								"value": "floor(random(highest_number)) + 1"
+							}
+						}
+					],
+					"sid": 236868368465274,
+					"isOrBlock": true
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 279113704965953
+				}
+			],
+			"actions": [],
+			"sid": 494289344877684,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "repeat",
+							"objectClass": "System",
+							"sid": 636179973135496,
+							"parameters": {
+								"count": "Count*3"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 720971383184900,
+							"parameters": {
+								"object-to-create": "Kraken",
+								"layer": "0",
+								"x": "random(ViewportWidth(0)/20, NumOfKrakensToCatchText.X-Kraken.Width)",
+								"y": "random(ViewportHeight(0)/20, ViewportHeight(0)-ViewportHeight(0)/20-Kraken.Height)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "stop-animation",
+							"objectClass": "Kraken",
+							"sid": 998331933917595
+						}
+					],
+					"sid": 933781935565591
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 580428525849115
+				}
+			],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "NumOfKrakensToCatchText",
+					"sid": 280179343915156,
+					"parameters": {
+						"text": "count"
+					}
+				}
+			],
+			"sid": 645707788340218
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-tap-object",
+					"objectClass": "Touch",
+					"sid": 324885780744280,
+					"parameters": {
+						"object": "Kraken"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "toggle-boolean-instvar",
+					"objectClass": "Kraken",
+					"sid": 478813372178761,
+					"parameters": {
+						"instance-variable": "selected"
+					}
+				},
+				{
+					"id": "set-animation-frame",
+					"objectClass": "Kraken",
+					"sid": 941114483663723,
+					"parameters": {
+						"frame-number": "Kraken.selected"
+					}
+				}
+			],
+			"sid": 289735950238137
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "Button",
+					"sid": 871677650769554
+				}
+			],
+			"actions": [],
+			"sid": 926459730485368,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 768373791553996,
+							"parameters": {
+								"object": "Kraken"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 949094901647009,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "Kraken",
+									"sid": 221605189823780,
+									"parameters": {
+										"instance-variable": "selected"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "Kraken",
+									"sid": 475593993835618
+								}
+							],
+							"sid": 371169980627202
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "Button",
+					"sid": 658188205829536
+				}
+			],
+			"actions": [
+				{
+					"id": "set-visible",
+					"objectClass": "CaughtKrakensNumText",
+					"sid": 221826689078293,
+					"parameters": {
+						"visibility": "visible"
+					}
+				},
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 527163698448385,
+					"parameters": {
+						"variable": "start",
+						"value": "false"
+					}
+				},
+				{
+					"id": "signal",
+					"objectClass": "System",
+					"sid": 106366437281676,
+					"parameters": {
+						"tag": "\"GO\""
+					}
+				}
+			],
+			"sid": 627760429427727
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 550063944995677
+				}
+			],
+			"actions": [],
+			"sid": 942259238704912,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "Kraken",
+							"sid": 541248765817318,
+							"parameters": {
+								"object": "NumOfKrakensToCatchText"
+							}
+						},
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "Kraken",
+							"sid": 440495565538399,
+							"parameters": {
+								"object": "Kraken"
+							}
+						},
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "Kraken",
+							"sid": 438655675366415,
+							"parameters": {
+								"object": "CaughtKrakensNumText"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-position",
+							"objectClass": "Kraken",
+							"sid": 989294982467806,
+							"parameters": {
+								"x": "random(ViewportWidth(0)/20, ViewportWidth(0)-ViewportWidth(0)/20-Kraken.Width)",
+								"y": "random(ViewportHeight(0)/20, ViewportHeight(0)-ViewportHeight(0)/20-Kraken.Height)"
+							}
+						}
+					],
+					"sid": 763748686119634,
+					"isOrBlock": true
+				}
+			],
+			"isOrBlock": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-overlapping-another-object",
+					"objectClass": "Kraken",
+					"sid": 616741349253984,
+					"parameters": {
+						"object": "CaughtKrakensNumText"
+					}
+				},
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 369738843602897,
+					"parameters": {
+						"variable": "start"
+					},
+					"isInverted": true
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "Kraken",
+					"sid": 361217728134945
+				},
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 398810008465311,
+					"parameters": {
+						"variable": "selected",
+						"value": "1"
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "CaughtKrakensNumText",
+					"sid": 162289156255181,
+					"parameters": {
+						"text": "selected"
+					}
+				},
+				{
+					"id": "signal",
+					"objectClass": "System",
+					"sid": 865829413833201,
+					"parameters": {
+						"tag": "\"GO\""
+					}
+				}
+			],
+			"sid": 150763480206147
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-signal",
+					"objectClass": "System",
+					"sid": 574036579341873,
+					"parameters": {
+						"tag": "\"GO\""
+					}
+				}
+			],
+			"actions": [],
+			"sid": 664214924252431,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "Kraken",
+							"sid": 741626181356837,
+							"parameters": {
+								"which": "furthest",
+								"x": "CaughtKrakensNumText.X",
+								"y": "CaughtKrakensNumText.Y"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-to-object",
+							"objectClass": "Kraken",
+							"sid": 650011687025669,
+							"behaviorType": "MoveTo",
+							"parameters": {
+								"object": "CaughtKrakensNumText",
+								"image-point": "0",
+								"mode": "direct"
+							}
+						}
+					],
+					"sid": 953338029929341
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-two-values",
+					"objectClass": "System",
+					"sid": 428577934278571,
+					"parameters": {
+						"first-value": "Kraken.Count",
+						"comparison": 3,
+						"second-value": "0"
+					}
+				},
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 774336848325577,
+					"parameters": {
+						"variable": "start"
+					},
+					"isInverted": true
+				}
+			],
+			"actions": [
+				{
+					"id": "move-to-object",
+					"objectClass": "NumOfKrakensToCatchText",
+					"sid": 251732084939782,
+					"behaviorType": "MoveTo",
+					"parameters": {
+						"object": "CaughtKrakensNumText",
+						"image-point": "0",
+						"mode": "direct"
+					}
+				},
+				{
+					"id": "move-to-object",
+					"objectClass": "CaughtKrakensNumText",
+					"sid": 513713835692725,
+					"behaviorType": "MoveTo",
+					"parameters": {
+						"object": "NumOfKrakensToCatchText",
+						"image-point": "0",
+						"mode": "direct"
+					}
+				}
+			],
+			"sid": 613370027903192
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-arrived",
+					"objectClass": "CaughtKrakensNumText",
+					"sid": 889255733658621,
+					"behaviorType": "MoveTo"
+				}
+			],
+			"actions": [
+				{
+					"id": "wait",
+					"objectClass": "System",
+					"sid": 716287847600381,
+					"parameters": {
+						"seconds": "3"
+					}
+				}
+			],
+			"sid": 475526197025290,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 945643055766981,
+							"parameters": {
+								"first-value": "count",
+								"comparison": 0,
+								"second-value": "selected"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 144147051887518,
+							"parameters": {
+								"variable": "reset_count",
+								"value": "true"
+							}
+						},
+						{
+							"id": "go-to-layout",
+							"objectClass": "System",
+							"sid": 695699349293311,
+							"parameters": {
+								"layout": "Prize"
+							}
+						}
+					],
+					"sid": 500498197233526
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 989608052652257
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 676471194214589,
+							"parameters": {
+								"variable": "reset_count",
+								"value": "false"
+							}
+						},
+						{
+							"id": "restart-layout",
+							"objectClass": "System",
+							"sid": 835030825154084
+						}
+					],
+					"sid": 608547028699826
+				}
+			]
+		}
+	],
+	"sid": 901236662007148
+}

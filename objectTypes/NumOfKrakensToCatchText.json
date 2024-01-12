@@ -1,0 +1,15 @@
+{
+	"name": "NumOfKrakensToCatchText",
+	"plugin-id": "Text",
+	"sid": 338483563930833,
+	"isGlobal": false,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "MoveTo",
+			"name": "MoveTo",
+			"sid": 611291729177981
+		}
+	],
+	"effectTypes": []
+}

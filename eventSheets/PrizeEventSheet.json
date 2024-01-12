@@ -1,0 +1,35 @@
+{
+	"name": "PrizeEventSheet",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 879924402485697
+				}
+			],
+			"actions": [
+				{
+					"id": "wait",
+					"objectClass": "System",
+					"sid": 547655209203441,
+					"parameters": {
+						"seconds": "3"
+					}
+				},
+				{
+					"id": "go-to-layout",
+					"objectClass": "System",
+					"sid": 284103429770841,
+					"parameters": {
+						"layout": "Game"
+					}
+				}
+			],
+			"sid": 982996433642227
+		}
+	],
+	"sid": 407500719106175
+}
