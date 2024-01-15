@@ -9,6 +9,11 @@
 			"behaviorId": "MoveTo",
 			"name": "MoveTo",
 			"sid": 278157549289293
+		},
+		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 143699145103747
 		}
 	],
 	"effectTypes": []

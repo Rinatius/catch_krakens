@@ -6,9 +6,14 @@
 	"instanceVariables": [],
 	"behaviorTypes": [
 		{
+			"behaviorId": "Anchor",
+			"name": "Anchor",
+			"sid": 489988139497559
+		},
+		{
 			"behaviorId": "MoveTo",
 			"name": "MoveTo",
-			"sid": 611291729177981
+			"sid": 833726057210280
 		}
 	],
 	"effectTypes": []

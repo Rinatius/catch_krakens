@@ -159,9 +159,9 @@
 						{
 							"id": "repeat",
 							"objectClass": "System",
-							"sid": 636179973135496,
+							"sid": 866872460372757,
 							"parameters": {
-								"count": "Count*3"
+								"count": "Count*2"
 							}
 						}
 					],
@@ -169,12 +169,26 @@
 						{
 							"id": "create-object",
 							"objectClass": "System",
-							"sid": 720971383184900,
+							"sid": 538992684658179,
 							"parameters": {
 								"object-to-create": "Kraken",
 								"layer": "0",
-								"x": "random(ViewportWidth(0)/20, NumOfKrakensToCatchText.X-Kraken.Width)",
-								"y": "random(ViewportHeight(0)/20, ViewportHeight(0)-ViewportHeight(0)/20-Kraken.Height)",
+								"x": "random(ViewportMidX(0)-ViewportMidX(0), ViewportMidX(0)+ViewportMidX(0))",
+								"y": "random(ViewportMidY(0)-ViewportMidY(0), ViewportMidY(0)+ViewportMidY(0))",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 265756025468557,
+							"disabled": true,
+							"parameters": {
+								"object-to-create": "Kraken",
+								"layer": "0",
+								"x": "ViewportMidX(0)",
+								"y": "ViewportMidY(0)",
 								"create-hierarchy": false,
 								"template-name": "\"\""
 							}
@@ -329,6 +343,11 @@
 					"parameters": {
 						"tag": "\"GO\""
 					}
+				},
+				{
+					"id": "destroy",
+					"objectClass": "Button",
+					"sid": 936571327103348
 				}
 			],
 			"sid": 627760429427727
@@ -337,9 +356,12 @@
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "on-start-of-layout",
+					"id": "compare-boolean-eventvar",
 					"objectClass": "System",
-					"sid": 550063944995677
+					"sid": 997453734676009,
+					"parameters": {
+						"variable": "start"
+					}
 				}
 			],
 			"actions": [],
@@ -377,10 +399,11 @@
 						{
 							"id": "set-position",
 							"objectClass": "Kraken",
-							"sid": 989294982467806,
+							"sid": 587644203740309,
+							"disabled": true,
 							"parameters": {
-								"x": "random(ViewportWidth(0)/20, ViewportWidth(0)-ViewportWidth(0)/20-Kraken.Width)",
-								"y": "random(ViewportHeight(0)/20, ViewportHeight(0)-ViewportHeight(0)/20-Kraken.Height)"
+								"x": "random(KrakenDestroy.X, KrakenDestroy.X+PlatformInfo.WindowInnerWidth-Kraken.Width)",
+								"y": "random(0, PlatformInfo.WindowInnerHeight-Kraken.Height)"
 							}
 						}
 					],
@@ -396,9 +419,9 @@
 				{
 					"id": "is-overlapping-another-object",
 					"objectClass": "Kraken",
-					"sid": 616741349253984,
+					"sid": 885921899099419,
 					"parameters": {
-						"object": "CaughtKrakensNumText"
+						"object": "KrakenDestroy"
 					}
 				},
 				{
@@ -466,11 +489,11 @@
 						{
 							"id": "pick-nearestfurthest",
 							"objectClass": "Kraken",
-							"sid": 741626181356837,
+							"sid": 942740207626276,
 							"parameters": {
 								"which": "furthest",
-								"x": "CaughtKrakensNumText.X",
-								"y": "CaughtKrakensNumText.Y"
+								"x": "KrakenDestroy.X",
+								"y": "KrakenDestroy.Y"
 							}
 						}
 					],
@@ -478,10 +501,10 @@
 						{
 							"id": "move-to-object",
 							"objectClass": "Kraken",
-							"sid": 650011687025669,
+							"sid": 313511608671820,
 							"behaviorType": "MoveTo",
 							"parameters": {
-								"object": "CaughtKrakensNumText",
+								"object": "KrakenDestroy",
 								"image-point": "0",
 								"mode": "direct"
 							}
@@ -516,14 +539,21 @@
 			],
 			"actions": [
 				{
-					"id": "move-to-object",
-					"objectClass": "NumOfKrakensToCatchText",
-					"sid": 251732084939782,
-					"behaviorType": "MoveTo",
+					"id": "set-enabled",
+					"objectClass": "CaughtKrakensNumText",
+					"sid": 569670364949723,
+					"behaviorType": "Anchor",
 					"parameters": {
-						"object": "CaughtKrakensNumText",
-						"image-point": "0",
-						"mode": "direct"
+						"state": "disabled"
+					}
+				},
+				{
+					"id": "set-enabled",
+					"objectClass": "NumOfKrakensToCatchText",
+					"sid": 782413635872045,
+					"behaviorType": "Anchor",
+					"parameters": {
+						"state": "disabled"
 					}
 				},
 				{
@@ -533,6 +563,17 @@
 					"behaviorType": "MoveTo",
 					"parameters": {
 						"object": "NumOfKrakensToCatchText",
+						"image-point": "0",
+						"mode": "direct"
+					}
+				},
+				{
+					"id": "move-to-object",
+					"objectClass": "NumOfKrakensToCatchText",
+					"sid": 333968749709443,
+					"behaviorType": "MoveTo",
+					"parameters": {
+						"object": "CaughtKrakensNumText",
 						"image-point": "0",
 						"mode": "direct"
 					}
@@ -554,9 +595,9 @@
 				{
 					"id": "wait",
 					"objectClass": "System",
-					"sid": 716287847600381,
+					"sid": 954791441973555,
 					"parameters": {
-						"seconds": "3"
+						"seconds": "1"
 					}
 				}
 			],
