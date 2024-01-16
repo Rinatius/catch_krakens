@@ -159,9 +159,9 @@
 						{
 							"id": "repeat",
 							"objectClass": "System",
-							"sid": 866872460372757,
+							"sid": 191540682885282,
 							"parameters": {
-								"count": "Count*2"
+								"count": "Count+floor(random(2, 6))"
 							}
 						}
 					],
@@ -342,11 +342,16 @@
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "compare-boolean-eventvar",
+					"id": "on-start-of-layout",
 					"objectClass": "System",
-					"sid": 997453734676009,
+					"sid": 130455791106276
+				},
+				{
+					"id": "repeat",
+					"objectClass": "System",
+					"sid": 881972882916464,
 					"parameters": {
-						"variable": "start"
+						"count": "5"
 					}
 				}
 			],
@@ -379,25 +384,31 @@
 							"parameters": {
 								"object": "CaughtKrakensNumText"
 							}
+						},
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "Kraken",
+							"sid": 209645735020071,
+							"parameters": {
+								"object": "Button"
+							}
 						}
 					],
 					"actions": [
 						{
 							"id": "set-position",
 							"objectClass": "Kraken",
-							"sid": 587644203740309,
-							"disabled": true,
+							"sid": 791674159242059,
 							"parameters": {
-								"x": "random(KrakenDestroy.X, KrakenDestroy.X+PlatformInfo.WindowInnerWidth-Kraken.Width)",
-								"y": "random(0, PlatformInfo.WindowInnerHeight-Kraken.Height)"
+								"x": "random(ViewportLeft(0), ViewportRight(0))",
+								"y": "random(ViewportTop(0), ViewportBottom(0))"
 							}
 						}
 					],
 					"sid": 763748686119634,
 					"isOrBlock": true
 				}
-			],
-			"isOrBlock": true
+			]
 		},
 		{
 			"eventType": "block",
