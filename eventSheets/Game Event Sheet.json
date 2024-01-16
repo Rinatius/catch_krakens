@@ -169,26 +169,12 @@
 						{
 							"id": "create-object",
 							"objectClass": "System",
-							"sid": 538992684658179,
+							"sid": 735565971597054,
 							"parameters": {
 								"object-to-create": "Kraken",
 								"layer": "0",
-								"x": "random(ViewportMidX(0)-ViewportMidX(0), ViewportMidX(0)+ViewportMidX(0))",
-								"y": "random(ViewportMidY(0)-ViewportMidY(0), ViewportMidY(0)+ViewportMidY(0))",
-								"create-hierarchy": false,
-								"template-name": "\"\""
-							}
-						},
-						{
-							"id": "create-object",
-							"objectClass": "System",
-							"sid": 265756025468557,
-							"disabled": true,
-							"parameters": {
-								"object-to-create": "Kraken",
-								"layer": "0",
-								"x": "ViewportMidX(0)",
-								"y": "ViewportMidY(0)",
+								"x": "random(ViewportLeft(0), ViewportRight(0))",
+								"y": "random(ViewportTop(0), ViewportBottom(0))",
 								"create-hierarchy": false,
 								"template-name": "\"\""
 							}
